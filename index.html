@@ -91,9 +91,9 @@
                     
                     const box = new THREE.Box3().setFromObject(model);
                     const center = box.getCenter(new THREE.Vector3());
-                    const size = box.getSize(new THREE.Vector3());
                     
                     model.position.sub(center);
+                    
                     model.traverse(function (child) {
                         if (child.isMesh) {
                             child.material = new THREE.MeshStandardMaterial({ 
@@ -106,9 +106,7 @@
 
                     scene.add(model);
                 },
-                function (xhr) {
-                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-                },
+                undefined,
                 function (error) {
                     console.warn('Could not load final.obj, rendering fallback shape:', error);
                     createFallbackMesh();
